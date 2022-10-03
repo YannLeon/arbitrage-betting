@@ -60,9 +60,12 @@ const getData = async () => {
      const result = await page.evaluate(()=>{
         //console.log("oui")
         let result=[]
-        let element = document.querySelector(".ReactVirtualized__Grid").children[0].childNodes.forEach(e => {
+        document.querySelector(".ReactVirtualized__Grid").children[0].childNodes.forEach(e => {
             const l = e.innerText.split('\n')
-            result.push([l[8],l[9],l[11],l[12],l[14],l[15]])
+            if(l.length===17){
+            result.push(
+                //[l[8],l[9],l[11],l[12],l[14],l[15]]
+            {team1:l[8],team2:l[14],odds1:l[9], odds2:l[15],oddsNul:l[12]})}
         });
         //children[1].innerText.split('\n')
 
