@@ -32,8 +32,7 @@ const getData = async () => {
             //17 is to be sure to have the correct element (the one with the odds)
             if(l.length===17){
             result.push(
-                //[l[8],l[9],l[11],l[12],l[14],l[15]]
-            {team1:l[8],team2:l[14],odds1:l[9], odds2:l[15],oddsNul:l[12]})}
+            {team1:l[8],team2:l[14],odds1:l[9], odds2:l[15],oddsNul:l[12], idSite:"winamax"})}
         });
 
         return Promise.resolve(result)
