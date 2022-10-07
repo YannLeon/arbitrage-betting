@@ -2,8 +2,8 @@
 const winamaxScrapper = require('./winamaxScrapper')
 const fdjScrapper = require('./fdjScrapper')
 var stringSimilarity = require("string-similarity");
-const {compare} = require("./estimator");
-
+const {compare, estimate} = require("./estimator");
+const budget= 100
 
 
 const  main = async () =>{
@@ -19,7 +19,16 @@ const  main = async () =>{
     const minLength= Math.min(winamaxResult.length,fdjResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
-        console.log(compare([winamaxResult[i],fdjResult[i]]))
+        const list = [winamaxResult[i],fdjResult[i]]
+        const comparaison = compare(list)
+        if(comparaison<1){
+            const estimation = estimate(list, comparaison, budget)
+            console.log(`Arbitrage betting detected, bet as followed for ${budget}€ budget`)
+            console.log(JSON.stringify(estimation))
+        }
+        else{
+            console.log("no arbitrage betting available")
+        }
     }
 
 }

@@ -26,7 +26,9 @@ const estimate = (list, total, invest) =>{
     max2={...max2, amountToBet:(invest/(max2.odd*total))}
     maxNul={...maxNul, amountToBet:(invest/(maxNul.odd*total))}
 
+    return({team1bet:max1, team2bet:max2, nulBet:maxNul})
+
 
 }
 
-module.exports={compare}
+module.exports={compare, estimate}
