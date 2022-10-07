@@ -34,6 +34,7 @@ const  main = async () =>{
         }
         else{
             console.log("no arbitrage betting available")
+            console.log("result was "+ comparaison)
         }
     }
 
