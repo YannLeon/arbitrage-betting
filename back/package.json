@@ -9,6 +9,7 @@
   "author": "Yann LEON",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^18.0.5"
+    "puppeteer": "^18.0.5",
+    "string-similarity": "^4.0.4"
   }
 }
