@@ -19,8 +19,14 @@ const  main = async () =>{
     const minLength= Math.min(winamaxResult.length,fdjResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
-        const list = [winamaxResult[i],fdjResult[i]]
+        const fdjClosest = fdjResult.map(e=>stringSimilarity.compareTwoStrings((winamaxResult[i].team1+' - '+ winamaxResult[i].team2).toUpperCase(),(e.team1+' - '+ e.team2).toUpperCase()))
+        const fdjMax = Math.max(...fdjClosest)
+        //console.log(fdjMax)
+        const fdjMaxObject = fdjResult[fdjClosest.indexOf(fdjMax)]
+        //console.log(fdjMaxObject.team1+" - "+fdjMaxObject.team2)
+        const list = [winamaxResult[i],fdjResult[fdjClosest.indexOf(fdjMax)]]
         const comparaison = compare(list)
+
         if(comparaison<1){
             const estimation = estimate(list, comparaison, budget)
             console.log(`Arbitrage betting detected, bet as followed for ${budget}€ budget`)
