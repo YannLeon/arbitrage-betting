@@ -5,5 +5,6 @@ A personal side project aiming at creating an arbitrage betting full stack appli
 
 For the moment :
 
+npm install
 cd back
 node index.js
