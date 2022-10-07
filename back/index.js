@@ -5,6 +5,14 @@ var stringSimilarity = require("string-similarity");
 const {compare, estimate} = require("./estimator");
 const budget= 100
 
+const findClosestObject = (originalObject, listToSearch) =>{
+    const listOfDistance = listToSearch.map(e=>stringSimilarity.compareTwoStrings(
+        (originalObject.team1+' - '+ originalObject.team2).toUpperCase(),(e.team1+' - '+ e.team2).toUpperCase()
+    ))
+    const closestScore=Math.max(...listOfDistance)
+    return(listToSearch[listOfDistance.indexOf(closestScore)])
+
+}
 
 const  main = async () =>{
     console.log("hello")
@@ -19,12 +27,8 @@ const  main = async () =>{
     const minLength= Math.min(winamaxResult.length,fdjResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
-        const fdjClosest = fdjResult.map(e=>stringSimilarity.compareTwoStrings((winamaxResult[i].team1+' - '+ winamaxResult[i].team2).toUpperCase(),(e.team1+' - '+ e.team2).toUpperCase()))
-        const fdjMax = Math.max(...fdjClosest)
-        //console.log(fdjMax)
-        const fdjMaxObject = fdjResult[fdjClosest.indexOf(fdjMax)]
-        //console.log(fdjMaxObject.team1+" - "+fdjMaxObject.team2)
-        const list = [winamaxResult[i],fdjResult[fdjClosest.indexOf(fdjMax)]]
+        const fdjClosestObject = findClosestObject(winamaxResult[i],fdjResult)
+        const list = [winamaxResult[i],fdjClosestObject]
         const comparaison = compare(list)
 
         if(comparaison<1){
