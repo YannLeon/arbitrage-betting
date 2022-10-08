@@ -1,8 +1,9 @@
 //require('./server.js')
-const winamaxScrapper = require('./winamaxScrapper')
-const fdjScrapper = require('./fdjScrapper')
-const betclicScrapper = require('./betclicScrapper')
-const unibetScrapper = require('./unibetScrapper')
+const winamaxScrapper = require('./Scappers/winamaxScrapper')
+const fdjScrapper = require('./Scappers/fdjScrapper')
+const betclicScrapper = require('./Scappers/betclicScrapper')
+const unibetScrapper = require('./Scappers/unibetScrapper')
+const pokerStarsScrapper = require('./Scappers/pokerStarsScrapper')
 var stringSimilarity = require("string-similarity");
 const {compare, estimate} = require("./estimator");
 const budget= 100
@@ -28,16 +29,20 @@ const  main = async () =>{
     const betclicResult = await betclicScrapper.getData()
     console.log("loading unibet odds")
     const unibetResult = await unibetScrapper.getData()
+    console.log("loading pokerStars odds")
+    const pokerStarsResult = await pokerStarsScrapper.getData()
 
 
     console.log("comparing")
-    const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length)
+    const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length, unibetResult.length,
+        pokerStarsResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
         const fdjClosestObject = findClosestObject(winamaxResult[i],fdjResult)
         const betclicClosestObject = findClosestObject(winamaxResult[i], fdjResult)
         const unibetClosestObject = findClosestObject(winamaxResult[i], unibetResult)
-        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject]
+        const pokerStarsClosestObject = findClosestObject(winamaxResult[i],pokerStarsResult)
+        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject, pokerStarsClosestObject]
         const comparaison = compare(list)
 
         if(comparaison<1){
