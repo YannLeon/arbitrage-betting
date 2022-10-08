@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer")
 
 const getData = async () => {
     // 1 - Créer une instance de navigateur
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     const cookies = [{name:"TC_PRIVACY", value:"0%21004%7C19%7C5606%215%2C2%216%211665236807845%2C1665236747021%2C1680788807845%21"},
         {name:"TC_PRIVACY_CENTER", value:"5%2C2"}]

@@ -1,6 +1,8 @@
 //require('./server.js')
 const winamaxScrapper = require('./winamaxScrapper')
 const fdjScrapper = require('./fdjScrapper')
+const betclicScrapper = require('./betclicScrapper')
+const unibetScrapper = require('./unibetScrapper')
 var stringSimilarity = require("string-similarity");
 const {compare, estimate} = require("./estimator");
 const budget= 100
@@ -23,7 +25,10 @@ const  main = async () =>{
     console.log("loading fdj odds")
     const fdjResult = await fdjScrapper.getData()
     console.log("loading betclic odds")
-    const betclicResult = await fdjScrapper.getData()
+    const betclicResult = await betclicScrapper.getData()
+    console.log("loading unibet odds")
+    const unibetResult = await unibetScrapper.getData()
+
 
     console.log("comparing")
     const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length)
@@ -31,7 +36,8 @@ const  main = async () =>{
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
         const fdjClosestObject = findClosestObject(winamaxResult[i],fdjResult)
         const betclicClosestObject = findClosestObject(winamaxResult[i], fdjResult)
-        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject]
+        const unibetClosestObject = findClosestObject(winamaxResult[i], unibetResult)
+        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject]
         const comparaison = compare(list)
 
         if(comparaison<1){

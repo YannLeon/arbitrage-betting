@@ -3,7 +3,7 @@ const puppeteer = require("puppeteer")
 
 const getData = async () => {
     // 1 - Créer une instance de navigateur
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     const cookies = [{name:"TC_PRIVACY_PSEL", value:"0@037%7C14%7C1881@8%2C9%2C10@@1664799872669%2C1664799872669%2C1680351872669@"}]
     
@@ -25,8 +25,9 @@ const getData = async () => {
              e.querySelectorAll(".outcomeButton-data").forEach(e2=>{
                  odds.push(e2.innerText)
              })
-             result.push({team1:gameTitle.split(" - ")[0],
-             team2:gameTitle.split(" - ")[1],
+             result.push({
+                 team1:gameTitle.split(" - ")[0],
+                 team2:gameTitle.split(" - ")[1],
                  odds1:odds[0],
                  odds2:odds[2],
                  oddsNul:odds[1],
@@ -37,7 +38,6 @@ const getData = async () => {
      })
 
     // 4 - Retourner les données
-     console.log(result)
     //await browser.close()
     return result
   }
