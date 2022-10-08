@@ -19,16 +19,19 @@ const  main = async () =>{
 // Appel de la fonction getData() et affichage des données
     console.log("loading winamax odds")
     const winamaxResult = await winamaxScrapper.getData()
-    //console.log(winamaxResult)
+
     console.log("loading fdj odds")
     const fdjResult = await fdjScrapper.getData()
-    //console.log(fdjResult)
+    console.log("loading betclic odds")
+    const betclicResult = await fdjScrapper.getData()
+
     console.log("comparing")
-    const minLength= Math.min(winamaxResult.length,fdjResult.length)
+    const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
         const fdjClosestObject = findClosestObject(winamaxResult[i],fdjResult)
-        const list = [winamaxResult[i],fdjClosestObject]
+        const betclicClosestObject = findClosestObject(winamaxResult[i], fdjResult)
+        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject]
         const comparaison = compare(list)
 
         if(comparaison<1){
