@@ -66,8 +66,9 @@ const estimateForLeague = async(league) =>{
 }
 const  main = async () =>{
     console.log("hello")
-    //await estimateForLeague("ligue1")
+    await estimateForLeague("ligue1")
     await estimateForLeague("premierLeague")
+    process.exit()
 }
 
-main()
+main().then()
