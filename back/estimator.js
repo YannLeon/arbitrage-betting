@@ -2,9 +2,11 @@
 const getMaxWithIndex=(list, index)=>{
     let max={odd:0}
     list.forEach(e=>{
-        const result = parseFloat(e[index].replace(',','.'))
-        if(result>max.odd){
-            max={odd:result, idSite:e.idSite}
+        if(e!=null) {
+            const result = parseFloat(e[index].replace(',', '.'))
+            if (result > max.odd) {
+                max = {odd: result, idSite: e.idSite}
+            }
         }
     })
     return max

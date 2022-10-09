@@ -3,6 +3,7 @@ const winamaxScrapper = require('./Scappers/winamaxScrapper')
 const fdjScrapper = require('./Scappers/fdjScrapper')
 const betclicScrapper = require('./Scappers/betclicScrapper')
 const unibetScrapper = require('./Scappers/unibetScrapper')
+const bwinScrapper = require('./Scappers/bwinScrapper')
 const pokerStarsScrapper = require('./Scappers/pokerStarsScrapper')
 var stringSimilarity = require("string-similarity");
 const {compare, estimate} = require("./estimator");
@@ -13,7 +14,10 @@ const findClosestObject = (originalObject, listToSearch) =>{
         (originalObject.team1+' - '+ originalObject.team2).toUpperCase(),(e.team1+' - '+ e.team2).toUpperCase()
     ))
     const closestScore=Math.max(...listOfDistance)
-    return(listToSearch[listOfDistance.indexOf(closestScore)])
+    if(closestScore>0.7) {
+        return (listToSearch[listOfDistance.indexOf(closestScore)])
+    }
+    else return null
 
 }
 
@@ -31,18 +35,22 @@ const  main = async () =>{
     const unibetResult = await unibetScrapper.getData()
     console.log("loading pokerStars odds")
     const pokerStarsResult = await pokerStarsScrapper.getData()
-
+    console.log("loading bwin odds")
+    const bwinResult = await bwinScrapper.getData()
 
     console.log("comparing")
     const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length, unibetResult.length,
-        pokerStarsResult.length)
+        pokerStarsResult.length, bwinResult.length)
     for(let i = 0; i<minLength;i++){
         console.log(winamaxResult[i].team1+' - '+ winamaxResult[i].team2)
         const fdjClosestObject = findClosestObject(winamaxResult[i],fdjResult)
         const betclicClosestObject = findClosestObject(winamaxResult[i], fdjResult)
         const unibetClosestObject = findClosestObject(winamaxResult[i], unibetResult)
         const pokerStarsClosestObject = findClosestObject(winamaxResult[i],pokerStarsResult)
-        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject, pokerStarsClosestObject]
+        const bwinClosestObject = findClosestObject(winamaxResult[i],bwinResult)
+        const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject, pokerStarsClosestObject,
+        bwinClosestObject]
+        //console.log(list)
         const comparaison = compare(list)
 
         if(comparaison<1){
