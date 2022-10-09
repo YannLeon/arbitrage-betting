@@ -23,6 +23,7 @@ const findClosestObject = (originalObject, listToSearch) =>{
 }
 const estimateForLeague = async(league) =>{
     // Appel de la fonction getData() et affichage des données
+    console.log("ESTIMATION FOR "+league)
     console.log("loading winamax odds")
     const winamaxResult = await winamaxScrapper.getData(league)
 
@@ -65,8 +66,8 @@ const estimateForLeague = async(league) =>{
 }
 const  main = async () =>{
     console.log("hello")
-    await estimateForLeague("ligue1")
-
+    //await estimateForLeague("ligue1")
+    await estimateForLeague("premierLeague")
 }
 
 main()

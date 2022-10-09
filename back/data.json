@@ -7,6 +7,15 @@
       "pokerStars": "https://www.pokerstars.fr/sports/#/soccer/competitions/12735553",
       "unibet": "https://www.unibet.fr/sport/football/ligue-1-ubereats",
       "winamax": "https://www.winamax.fr/paris-sportifs/sports/1/7/4"
+    },
+    "premierLeague": {
+      "betclic": "https://www.betclic.fr/football-s1/angl-premier-league-c3",
+      "bwin": "https://sports.bwin.fr/fr/sports/football-4/paris-sportifs/angleterre-14/premier-league-102841",
+      "fdj": "https://www.enligne.parionssport.fdj.fr/paris-football/angleterre/premier-league?filtre=58532401",
+      "pokerStars": "https://www.pokerstars.fr/sports/#/soccer/competitions/12735501",
+      "unibet": "https://www.unibet.fr/sport/football/premier-league",
+      "winamax": "https://www.winamax.fr/paris-sportifs/sports/1/1/1"
+
     }
   }
 }
