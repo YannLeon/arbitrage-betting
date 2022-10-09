@@ -1,14 +1,15 @@
 const puppeteer = require("puppeteer")
+const data = require('../data.json')
+const idSite="pokerStars"
 
-
-const getData = async () => {
+const getData = async (league) => {
     // 1 - Créer une instance de navigateur
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
 
     
     // 2 - Naviguer jusqu'à l'URL cible et set les cookies pour passer à travers de la popup
-    await page.goto("https://www.pokerstars.fr/sports/#/soccer/competitions/12735553")
+    await page.goto(data.league[league][idSite])
       
  
     // 3 - Récupérer les données...
@@ -40,7 +41,6 @@ const getData = async () => {
     return result
   }
   
-getData().then()
 
 module.exports={getData}
   

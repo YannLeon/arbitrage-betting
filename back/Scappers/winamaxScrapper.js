@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer")
-
+const data = require('../data.json')
+const idSite="winamax"
 const getScreenshot = async () => {
   const browser = await puppeteer.launch(
     { headless: false }
@@ -10,7 +11,7 @@ const getScreenshot = async () => {
   await browser.close()
 }
 
-const getData = async () => {
+const getData = async (league) => {
     // 1 - Créer une instance de navigateur
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
@@ -18,7 +19,7 @@ const getData = async () => {
     
     
     // 2 - Naviguer jusqu'à l'URL cible et set les cookies pour passer à travers de la popup
-    await page.goto("https://www.winamax.fr/paris-sportifs/sports/1/7/4")
+    await page.goto(data.league[league][idSite])
     await page.setCookie(...cookies);
       
  

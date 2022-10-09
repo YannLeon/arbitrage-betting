@@ -1,7 +1,9 @@
 const puppeteer = require("puppeteer")
 
+const data = require('../data.json')
+const idSite="fdj"
 
-const getData = async () => {
+const getData = async (league) => {
     // 1 - Créer une instance de navigateur
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
@@ -9,7 +11,8 @@ const getData = async () => {
     
     
     // 2 - Naviguer jusqu'à l'URL cible et set les cookies pour passer à travers de la popup
-    await page.goto("https://www.enligne.parionssport.fdj.fr/paris-football/france/ligue-1-uber-eats")
+
+    await page.goto(data.league[league][idSite])
     await page.setCookie(...cookies);
     await page.reload()
       
@@ -41,8 +44,7 @@ const getData = async () => {
     //await browser.close()
     return result
   }
-  
-getData().then()
+
 
 module.exports={getData}
   

@@ -1,7 +1,9 @@
 const puppeteer = require("puppeteer")
+const data = require('../data.json')
+const idSite="bwin"
 
+const getData = async (league) => {
 
-const getData = async () => {
     // 1 - Créer une instance de navigateur
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
@@ -10,7 +12,7 @@ const getData = async () => {
 
 
     // 2 - Naviguer jusqu'à l'URL cible et set les cookies pour passer à travers de la popup
-    await page.goto("https://sports.bwin.fr/fr/sports/football-4/paris-sportifs/france-16/ligue-1-102843")
+    await page.goto(data.league[league][idSite])
     await page.setCookie(...cookies);
     await page.reload()
  
@@ -43,7 +45,7 @@ const getData = async () => {
     return result
   }
   
-getData().then()
+
 
 module.exports={getData}
   

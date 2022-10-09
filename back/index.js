@@ -6,6 +6,7 @@ const unibetScrapper = require('./Scappers/unibetScrapper')
 const bwinScrapper = require('./Scappers/bwinScrapper')
 const pokerStarsScrapper = require('./Scappers/pokerStarsScrapper')
 var stringSimilarity = require("string-similarity");
+const data = require ("./data.json")
 const {compare, estimate} = require("./estimator");
 const budget= 100
 
@@ -20,23 +21,21 @@ const findClosestObject = (originalObject, listToSearch) =>{
     else return null
 
 }
-
-const  main = async () =>{
-    console.log("hello")
-// Appel de la fonction getData() et affichage des données
+const estimateForLeague = async(league) =>{
+    // Appel de la fonction getData() et affichage des données
     console.log("loading winamax odds")
-    const winamaxResult = await winamaxScrapper.getData()
+    const winamaxResult = await winamaxScrapper.getData(league)
 
     console.log("loading fdj odds")
-    const fdjResult = await fdjScrapper.getData()
+    const fdjResult = await fdjScrapper.getData(league)
     console.log("loading betclic odds")
-    const betclicResult = await betclicScrapper.getData()
+    const betclicResult = await betclicScrapper.getData(league)
     console.log("loading unibet odds")
-    const unibetResult = await unibetScrapper.getData()
+    const unibetResult = await unibetScrapper.getData(league)
     console.log("loading pokerStars odds")
-    const pokerStarsResult = await pokerStarsScrapper.getData()
+    const pokerStarsResult = await pokerStarsScrapper.getData(league)
     console.log("loading bwin odds")
-    const bwinResult = await bwinScrapper.getData()
+    const bwinResult = await bwinScrapper.getData(league)
 
     console.log("comparing")
     const minLength= Math.min(winamaxResult.length,fdjResult.length, betclicResult.length, unibetResult.length,
@@ -49,7 +48,7 @@ const  main = async () =>{
         const pokerStarsClosestObject = findClosestObject(winamaxResult[i],pokerStarsResult)
         const bwinClosestObject = findClosestObject(winamaxResult[i],bwinResult)
         const list = [winamaxResult[i],fdjClosestObject, betclicClosestObject, unibetClosestObject, pokerStarsClosestObject,
-        bwinClosestObject]
+            bwinClosestObject]
         //console.log(list)
         const comparaison = compare(list)
 
@@ -63,6 +62,10 @@ const  main = async () =>{
             console.log("result was "+ comparaison)
         }
     }
+}
+const  main = async () =>{
+    console.log("hello")
+    await estimateForLeague("ligue1")
 
 }
 

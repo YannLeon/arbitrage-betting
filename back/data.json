@@ -1,0 +1,12 @@
+{
+  "league": {
+    "ligue1": {
+      "betclic": "https://www.betclic.fr/football-s1/ligue-1-uber-eats-c4",
+      "bwin": "https://sports.bwin.fr/fr/sports/football-4/paris-sportifs/france-16/ligue-1-102843",
+      "fdj": "https://www.enligne.parionssport.fdj.fr/paris-football/france/ligue-1-uber-eats",
+      "pokerStars": "https://www.pokerstars.fr/sports/#/soccer/competitions/12735553",
+      "unibet": "https://www.unibet.fr/sport/football/ligue-1-ubereats",
+      "winamax": "https://www.winamax.fr/paris-sportifs/sports/1/7/4"
+    }
+  }
+}
